@@ -1,0 +1,22 @@
+
+ <div class="main">
+  <form class="text-center border border-light p-5">
+      <div id = "exit" (click)="hide()">X</div>
+
+       
+      <p class="h4 mb-4">Add Comment</p>
+    
+      <div class="form-row ">
+        <div class="col" >
+          <input type="text" id="inputs" class="form-control" [(ngModel)]="content" name= "content" placeholder="Type your review">
+        </div>
+      </div>
+      <br>
+      
+      <input id="inputs"type="number" class="form-control mb-4" [(ngModel)]="rating" name= "raing"  placeholder="Rating: How many points do you give out of 10?">
+
+      <input id="inputs" type="text"class="form-control mb-4" [(ngModel)]="name" name= "name"  placeholder="Write your name">    
+    
+        <button id="inputs" mdbBtn color="info" block="true" class="my-4" type="submit" (click)="addComment()">Add comment</button>
+  </form>
+</div>

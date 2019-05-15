@@ -1,0 +1,28 @@
+     <ng-container *ngIf="!logged">
+          <div>
+              <!-- Example row of columns -->
+              <div class>
+                <div *ngFor="let c of comments">
+                  <app-comment [comment] = "c"></app-comment>
+                </div>
+              </div>
+              <hr>
+            </div> <!-- /container --> 
+      </ng-container>
+  
+    <ng-container *ngIf="logged">
+      <div class="addComment">
+          <button type="button" routerLink="addcomment" class="btn" id="singleBtn"> Add new comment</button>
+      </div>
+      <div>
+          <!-- Example row of columns -->
+          <div class>
+            <div *ngFor="let c of comments">
+              <app-comment [comment] = "c"></app-comment>
+            </div>
+          </div>
+          <hr>
+        </div> <!-- /container -->
+        
+    </ng-container>  
+    

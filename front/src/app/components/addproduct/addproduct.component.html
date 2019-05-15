@@ -1,0 +1,30 @@
+
+ <div class="main">
+    <form class="text-center border border-light p-5">
+        <div id = "exit" (click)="hide()">X</div>
+        <p class="h4 mb-4">Sign up</p>
+      
+        <div class="form-row mb-4">
+          <div class="col">
+            <!-- First name -->
+            <input type="text" class="form-control" [(ngModel)]="name" name= "name" placeholder="First name">
+          </div>
+          <div class="col">
+            <!-- Last name -->
+            <input type="text"  class="form-control" [(ngModel)]="surname" name= "surname" placeholder="Last name">
+          </div>
+        </div>
+        <input type="email" class="form-control mb-4" [(ngModel)]="username" name= "username"  placeholder="Username">
+
+        <!-- E-mail -->
+        <input type="email"class="form-control mb-4" [(ngModel)]="email" name= "email"  placeholder="E-mail">
+      
+        <!-- Password -->
+        <input type="password"  class="form-control"[(ngModel)]="password" name= "password" placeholder="Password: At least 8 characters" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+      
+      
+      
+        <!-- Sign up button -->
+        <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="signUp()">Sign in</button>
+    </form>
+ </div>

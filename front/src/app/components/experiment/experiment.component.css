@@ -1,0 +1,23 @@
+
+
+@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Libre+Baskerville');
+@import url("https://fonts.googleapis.com/css?family=Josefin+Slab");
+
+
+.main{
+    margin-top:100px;
+    width: 80%;
+    margin-left: 200px;
+    height: 80%;
+}
+
+.cat{
+    color: rgb(196, 184, 184);
+    font-family: 'Josefin Slab', cursive; 
+    text-align: center;
+    font-weight: 100;
+    margin-top:50px;
+    font-size: 30px;
+}
+

@@ -1,0 +1,18 @@
+.main{
+    width: 50%;
+    margin-left:400px;
+    margin-top:50px;
+}
+#singleBtn{
+    background-color: greenyellow;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(250, 250, 250, 0.384);   
+}
+
+#singleBtn button:hover{
+    box-shadow: 0 0 30px rgba(191, 240, 14, 0.74);
+    transform: scale(1.2);
+  }

@@ -1,0 +1,17 @@
+@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Libre+Baskerville');
+@import url("https://fonts.googleapis.com/css?family=Stylish");
+
+
+.catName{
+    color: rgb(196, 184, 184);
+    font-family: 'Kaushan Script', cursive; 
+    text-align: center;
+    font-weight: 100;
+    font-size: 20px;
+}
+.description{
+    color: azure;
+    font-family: 'Stylish', sans-serif;
+    font-size: 18px;  
+}

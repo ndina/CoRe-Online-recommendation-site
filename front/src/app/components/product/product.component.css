@@ -1,0 +1,13 @@
+#singleBtn{
+    background-color: #f7f5f0;
+    border-radius: 10px;
+    padding:5px;
+    margin-top: 50px;
+    margin-left: 500px;
+    width: 700px;
+    box-shadow: 0 0 30px rgba(217, 219, 207, 0.74);
+}
+
+#SingleBtn button:hover{
+    transform: scale(1.2);
+}
