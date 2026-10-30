@@ -1,0 +1,205 @@
+[
+  {
+    "model": "main.category",
+    "pk": 1,
+    "fields": {
+      "name": "Health & Beauty",
+      "created_at": "2019-05-13T16:33:06Z",
+      "description": "The world of online beauty can be a baffling place. Its hard to know where to start, which products are right for your skin and hair, and where to find your faves at the best possible price. Don’t give up, yet. We’ve sourced the best places online to buy hair, makeup, and beauty products online.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 2,
+    "fields": {
+      "name": "Tech & Equipments",
+      "created_at": "2019-05-13T16:42:25Z",
+      "description": "Purchase your computers, software, hardware and other IT related supplies and peripherals through recommended suppliers. Also here you can find technical staff for home, work, etc. We’ve sourced the best places online to buy products online.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 3,
+    "fields": {
+      "name": "Tourism",
+      "created_at": "2019-05-13T16:43:09Z",
+      "description": "A tourist recommendation and planning application to assist users on the organization of a leisure and tourist agenda. First, a recommender system offers the user a list of the city places that are likely of interest to the user. This list takes into account the user demographic classification, the user likes in former trips and the preferences for the current visit.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 4,
+    "fields": {
+      "name": "Cinema",
+      "created_at": "2019-05-13T16:43:40Z",
+      "description": "Category  helps you find movies you will like. Rate movies to build a custom taste profile, then users recommend other movies for you to watch. Choose which films you like, you can tell it what kind of films you enjoy, which actors you want to see, and other criteria to help users to find the best movie for you.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 5,
+    "fields": {
+      "name": "Auto",
+      "created_at": "2019-05-13T16:44:03Z",
+      "description": "Making the decision to purchase a new car for you or your family can be both exciting and stressful. It’s easy to walk onto a car lot and find a visually appealing vehicle that’s fun to drive. But, knowing whether or not your choice is a good decision can be nerve-wracking.  Fortunately, there are some great resources out there to find honest reviews.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.category",
+    "pk": 6,
+    "fields": {
+      "name": "Books",
+      "created_at": "2019-05-13T16:44:23Z",
+      "description": "Looking for more good books to read?If you’re interested in reading books more consistently, you may find it useful..The page is a reading list sharing the best books to read in various categories based on many hours of reading and research. You’ll find more than 100 good books to read, organized by category.",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 1,
+    "fields": {
+      "name": "Gold Eyeshadow Palette",
+      "description": "A palette featuring 15 brand-new eyeshadow shades in the classic, signature Natasha Denona formulas, including matte, metallic, sparkling, and duo-chrome shades.",
+      "image": "https://d10qoa1dy3vloz.cloudfront.net/resized/680x854/slots-img/nat/nat033_natashadenona_goldpalette_1560x1960-en73f.jpg",
+      "created_at": "2019-05-13T16:48:26Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 2,
+    "fields": {
+      "name": "Full Force Flirt™ Mini Plump and Pout Duo",
+      "description": "A must-try duo of lip balm and lip gloss to create a soft, luscious, sexy lip look.",
+      "image": "https://i0.wp.com/beautystorage.ru/wp-content/uploads/2019/04/s2177251-main-zoom.jpg?fit=2000%2C2000&ssl=1",
+      "created_at": "2019-05-13T16:51:04Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 3,
+    "fields": {
+      "name": "Umbrian Clay Pore Purifying Face Mask",
+      "description": "A mineral-rich clay mask and face wash for all skin types that cleanses and minimizes pores and shine—without over-drying or clogging pores.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81XPcp7bxVL._SX355_.jpg",
+      "created_at": "2019-05-14T01:58:56Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 4,
+    "fields": {
+      "name": "Hair Cleanser",
+      "description": "An ideal solution that controls hair thinning, breakage and promotes regrowth.",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/71UOs%2BhCNpL._SY679_.jpg",
+      "created_at": "2019-05-14T02:01:27Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 5,
+    "fields": {
+      "name": "Look-Alive Eye Cream",
+      "description": "Hydrating hyaluronic acid and anti-inflammatory caffeine help deflate stubborn bags, and the ceramic tip cools on contact for an instant ahhh moment.",
+      "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1547352417-prod_1200831_xl.jpg?crop=1xw:1xh;center,top&resize=768:*",
+      "created_at": "2019-05-14T02:03:17Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 6,
+    "fields": {
+      "name": "CLARINS WATER LIP STAIN",
+      "description": "This buildable, water-based color has serious staying powder—try tapping it on using your finger for an effortless blurred effect",
+      "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1547237260-d604755b-81a8-4d51-aeff-2921edf854fb-1547237251.jpg?crop=1xw:0.9993337774816788xh;center,top&resize=768:*",
+      "created_at": "2019-05-14T02:03:55Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 7,
+    "fields": {
+      "name": "Most Calming Mist",
+      "description": "If there’s one beauty item deserving of a reserved spot on your desk, it’s this one. Rose water instantly soothes troubled skin and refreshes makeup in one spritz.",
+      "image": "https://m.media-amazon.com/images/S/aplus-media/vc/733202c0-fcee-42d2-a92a-514b63fafe70._CR0,0,300,400_PT0_SX300__.jpg",
+      "created_at": "2019-05-14T02:08:09Z",
+      "product_list": 1
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 1,
+    "fields": {
+      "name": "Beka",
+      "content": "This product is good!",
+      "created_by": 1,
+      "product": 1,
+      "rating": 8
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 2,
+    "fields": {
+      "name": "Dina",
+      "content": "I totally recommend this for everyone. You can buy this on lala.shop site.",
+      "created_by": 1,
+      "product": 2,
+      "rating": 7
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 4,
+    "fields": {
+      "name": "Dina",
+      "content": "Totally worth it!",
+      "created_by": 1,
+      "product": 1,
+      "rating": 8
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 6,
+    "fields": {
+      "name": "Marina",
+      "content": "In my case this product is not for everyone",
+      "created_by": 1,
+      "product": 1,
+      "rating": 2
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 8,
+    "fields": {
+      "name": "Dariya",
+      "content": "I dont like it",
+      "created_by": 1,
+      "product": 1,
+      "rating": 4
+    }
+  },
+  {
+    "model": "main.comment",
+    "pk": 9,
+    "fields": {
+      "name": "dina",
+      "content": "This product is good!",
+      "created_by": 1,
+      "product": 1,
+      "rating": 4
+    }
+  }
+]
