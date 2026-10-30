@@ -1,43 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { ProviderService } from 'src/app/services/provider.service';
-import { Router } from '@angular/router';
-import { IComment, IProduct } from 'src/app/models/models';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-addcomment',
   templateUrl: './addcomment.component.html',
-  styleUrls: ['./addcomment.component.css']
+  styleUrls: ['./addcomment.component.css'],
+  standalone: false,
 })
 export class AddcommentComponent implements OnInit {
 
-  constructor(private provider: ProviderService, private router: Router) { }
+  productId = 0;
+  content = '';
+  rating: number | null = null;
+  name = '';
+  error = '';
+  saving = false;
 
-  public commentList: IComment[]=[];
-  public currentProduct: IProduct;
-  public content:any='';
-  public name:any='';
-  public rating:any='';
-  public product:any;
+  constructor(private route: ActivatedRoute, private router: Router, private provider: ProviderService) {}
 
-
-  hide = () => {
-    this.router.navigateByUrl('');
-   }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.productId = Number(this.route.snapshot.paramMap.get('id'));
   }
 
+  close(): void {
+    this.router.navigate(['/products', this.productId, 'comments']);
+  }
 
-   addComment(){
-     this.provider.createComment(this.provider.curList.id, this.content, this.rating, this.name).then(res=>{
-       console.log(this.product)
-       this.content='';
-       this.rating='';
-       this.name='';
-       this.commentList.push(res);
-       alert(res.name + ", thank you for adding a comment!")
-       this.router.navigateByUrl('');
-     })
-   }
-
+  async addComment(): Promise<void> {
+    this.error = '';
+    this.saving = true;
+    try {
+      await this.provider.createComment(this.productId, this.content, Number(this.rating), this.name);
+      this.close();
+    } catch (err) {
+      this.error = this.provider.errorMessage(err);
+    } finally {
+      this.saving = false;
+    }
+  }
 }

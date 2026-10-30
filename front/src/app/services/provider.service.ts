@@ -1,87 +1,79 @@
 import { Injectable } from '@angular/core';
-import { MainService } from './main.service';
-import { HttpClient } from '@angular/common/http';
-import { ICategory, IProduct, IAuthResponse, IUser, IComment} from '../models/models';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProviderService extends MainService {
-  public categoryForProducts: ICategory;
-  public productForComments: IProduct;
-  public logged = false;
-  public curList:IProduct;
+import { environment } from '../../environments/environment';
+import { IAuthResponse, ICategory, IComment, IProduct, IUser } from '../models/models';
 
-  constructor(http: HttpClient) {
-    super(http);
-   }
+@Injectable({ providedIn: 'root' })
+export class ProviderService {
+  private readonly api = environment.apiUrl;
 
-   getCategories(): Promise<ICategory[]>{
-     return this.get('http://localhost:8000/categories/', {});
-   }  
+  /** True while a login token is saved in the browser. */
+  logged = !!localStorage.getItem('token');
 
-   setCategoryForProducts(category: ICategory){
-      this.categoryForProducts = category;
-   }
+  /** The product the user last opened, so the reviews page can show its name. */
+  lastProduct: IProduct | null = null;
 
-   getCategoryForProducts(){
-    return this.categoryForProducts;
-   }
+  constructor(private http: HttpClient) {}
 
+  getCategories(): Promise<ICategory[]> {
+    return firstValueFrom(this.http.get<ICategory[]>(`${this.api}/categories/`));
+  }
 
-   getProductForComments(){
-    return this.productForComments;
-   }
+  getCategory(id: number): Promise<ICategory> {
+    return firstValueFrom(this.http.get<ICategory>(`${this.api}/categories/${id}/`));
+  }
 
-   setProductForComments(product: IProduct){
-    this.productForComments = product;
-    this.curList=product;
+  getProducts(categoryId: number): Promise<IProduct[]> {
+    return firstValueFrom(this.http.get<IProduct[]>(`${this.api}/categories/${categoryId}/products/`));
+  }
+
+  getComments(productId: number): Promise<IComment[]> {
+    return firstValueFrom(this.http.get<IComment[]>(`${this.api}/products/${productId}/comments/`));
+  }
+
+  createComment(productId: number, content: string, rating: number, name: string): Promise<IComment> {
+    return firstValueFrom(
+      this.http.post<IComment>(`${this.api}/products/${productId}/comments/`, { content, rating, name }),
+    );
+  }
+
+  async login(username: string, password: string): Promise<IAuthResponse> {
+    const res = await firstValueFrom(
+      this.http.post<IAuthResponse>(`${this.api}/login/`, { username, password }),
+    );
+    localStorage.setItem('token', res.token);
+    this.logged = true;
+    return res;
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await firstValueFrom(this.http.post(`${this.api}/logout/`, {}));
+    } finally {
+      localStorage.removeItem('token');
+      this.logged = false;
     }
-
-   getProducts(id:number):Promise<IProduct[]>{
-    return this.get(`http://localhost:8000/categories/${id}/products/`, {});
-   } 
-
-   getComments(id:number):Promise<IComment[]>{
-    return this.get(`http://localhost:8000/products/${id}/comments/`, {});
-   } 
-
-
-  login(username: string, password: string): Promise<IAuthResponse> {
-    return this.post('http://localhost:8000/login/', {
-      username: username,
-      password: password
-    });
   }
 
-  logout(): Promise<any> {
-    return this.post('http://localhost:8000/logout/', {
-    });
+  createUser(username: string, password: string, email: string, name: string, surname: string): Promise<IUser> {
+    return firstValueFrom(
+      this.http.post<IUser>(`${this.api}/users/create/`, { username, password, email, name, surname }),
+    );
   }
 
-  toMainPage():Promise<any>{
-    return this.get('http://localhost:8000', {
-    });
-  }
-
-  createUser(username:string,password:string,email:string, name:string, surname:string):Promise<IUser>{
-    return this.post(`http://localhost:8000/users/create/`,{
-      username:username,
-      password:password,
-      email:email,
-      name:name,
-      surname:surname,
-    });
-  }
-
-  createComment(id:number,content:string, rating:number,name:string):Promise<IComment>{
-    return this.post(`http://localhost:8000/products/${id}/comments/`,{
-      content:content,
-      rating:rating,
-      name:name,
-    });
-  }
-  getTasksByName(i:IProduct,name:string): Promise<IComment[]> {
-    return this.get(`http://localhost:8000/products/${i.id}/comments/?name=${name}/`, {i,name});
+  /** Turns a backend error into one readable sentence for the forms. */
+  errorMessage(err: unknown): string {
+    if (err instanceof HttpErrorResponse) {
+      if (err.status === 0) {
+        return 'Cannot reach the server. Is the backend running on port 8000?';
+      }
+      if (err.error && typeof err.error === 'object') {
+        const first = Object.values(err.error)[0];
+        return Array.isArray(first) ? String(first[0]) : String(first);
+      }
+    }
+    return 'Something went wrong. Please try again.';
   }
 }

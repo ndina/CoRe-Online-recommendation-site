@@ -1,48 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/compiler/src/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProviderService } from 'src/app/services/provider.service';
-import { IUser } from 'src/app/models/models';
+
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  standalone: false,
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
-  
-  public isMember = false;
-  public authorized = false;
-  public username='';
-  public password='';
-  public email='';
-  public surname='';
-  public name='';
-  
-  constructor(private router: Router, private provider: ProviderService) { }
+  username = '';
+  password = '';
+  email = '';
+  name = '';
+  surname = '';
+  error = '';
 
-  ngOnInit() {
+  constructor(private router: Router, private provider: ProviderService) {}
 
-  }
-  hide(){
-    this.router.navigateByUrl('');
+  close(): void {
+    this.router.navigateByUrl('/');
   }
 
-
-  public signUp(){
-    if(this.username!==''){
-      this.provider.createUser(this.username, this.password,this.email, this.name, this.surname).then(res=>{
-        this.provider.login(this.username, this.password).then(res=>{
-          localStorage.setItem('token', res.token);
-          this.provider.logged=true;
-          this.router.navigateByUrl('');
-        })
-      })
+  async signUp(): Promise<void> {
+    this.error = '';
+    try {
+      await this.provider.createUser(this.username, this.password, this.email, this.name, this.surname);
+      await this.provider.login(this.username, this.password);
+      this.router.navigateByUrl('/categories');
+    } catch (err) {
+      this.error = this.provider.errorMessage(err);
     }
   }
-
-
-
-
 }

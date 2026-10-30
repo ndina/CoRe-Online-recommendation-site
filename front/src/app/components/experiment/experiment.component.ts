@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ProviderService } from 'src/app/services/provider.service';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-experiment',
   templateUrl: './experiment.component.html',
-  styleUrls: ['./experiment.component.css']
+  styleUrls: ['./experiment.component.css'],
+  standalone: false,
 })
-export class ExperimentComponent implements OnInit {
+export class ExperimentComponent implements OnInit, OnDestroy {
 
-  constructor(private provider: ProviderService, private router: Router) { }
+  // Placeholder photos from picsum.photos; fixed seeds keep them the same on every visit.
+  readonly slides = ['core-1', 'core-2', 'core-3'].map(seed => `https://picsum.photos/seed/${seed}/1200/500`);
+  current = 0;
+  private timer?: ReturnType<typeof setInterval>;
 
-  ngOnInit() {
-
-  }
-  images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
-
-  showCategories(){
-    this.router.navigateByUrl('categories')
+  ngOnInit(): void {
+    this.timer = setInterval(() => (this.current = (this.current + 1) % this.slides.length), 3000);
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
+  }
 }

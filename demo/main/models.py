@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from rest_framework import serializers
 
 
 
@@ -26,7 +25,7 @@ class Category(models.Model):
             "name": self.name,
             "description":self.description,
             "created_at": self.created_at,
-            "created_by":self.created_by
+            "created_by": self.created_by_id,
         }
 
 
