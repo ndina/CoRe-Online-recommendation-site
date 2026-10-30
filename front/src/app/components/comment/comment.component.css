@@ -1,34 +1,22 @@
-@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';
-@import url("https://fonts.googleapis.com/css?family=Sofia");
-@import url("https://fonts.googleapis.com/css?family=Teko");
-@import url("https://fonts.googleapis.com/css?family=Alegreya");
-
-#main{
-    background-color: #f7f5f0;
-    border-radius: 10px;
-    padding:5px;
-    margin-top: 50px;
-    margin-left: 500px;
-    width: 700px;  
+.avatar {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: darkolivegreen;
+  color: #fff;
+  font-size: 24px;
 }
-
-.rating{
-    font-family: 'Teko', cursive;
-    text-align: center;
-    font-weight: 100;  
-    font-size: 17px; 
+.user {
+  color: darkolivegreen;
+  font-family: 'Alegreya', serif;
 }
-
-.content{
-    font-family: 'Sofia', cursive;
-    text-align: center;
-    font-weight: 100; 
-    font-size: 17px;
-
+.content {
+  font-size: 17px;
 }
-
-#user{
-    color:darkolivegreen; 
-    font-family: 'Alegreya', cursive;
-    padding: 5px;
+.rating {
+  font-family: 'Teko', sans-serif;
+  font-size: 19px;
 }

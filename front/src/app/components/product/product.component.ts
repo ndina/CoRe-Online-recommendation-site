@@ -1,35 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ProviderService } from 'src/app/services/provider.service';
-import { Router } from '@angular/router';
-import { IProduct, ICategory, IComment } from 'src/app/models/models';
+import { Component, Input } from '@angular/core';
+
+import { IProduct } from '../../models/models';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  standalone: false,
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
 
-  constructor(private provider: ProviderService, private router: Router) { }
+  @Input({ required: true }) product!: IProduct;
 
-  public categories:ICategory[]=[];
-  public meals:IProduct[]=[];
-  public current:ICategory;
-  public showCat=true;
-  @Input()
-  public product: IProduct;
+  constructor(private provider: ProviderService) {}
 
-  ngOnInit() {
-
+  remember(): void {
+    this.provider.lastProduct = this.product;
   }
-
-  showCommentsOfProduct(product: IProduct){
-    this.provider.setProductForComments(product);
-    console.log(product);
-  }
-
-  // showProductsOfCategory(){
-  //   this.provider.setCategoryForProducts(this.category);
-  //   this.router.navigateByUrl('products');
-  // }
 }

@@ -1,32 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ProviderService } from 'src/app/services/provider.service';
-import { IProduct, IComment } from 'src/app/models/models';
-import { ThrowStmt } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { IComment } from '../../models/models';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.css']
+  styleUrls: ['./comments.component.css'],
+  standalone: false,
 })
 export class CommentsComponent implements OnInit {
 
-  constructor(private provider: ProviderService) { }
-  public productForComments: IProduct;
-  public logged=false;
-  public comments: IComment[] = [];
+  productId = 0;
+  productName = '';
+  comments: IComment[] = [];
+  error = '';
 
+  constructor(private route: ActivatedRoute, public provider: ProviderService) {}
 
-  ngOnInit() {
-    this.productForComments = this.provider.getProductForComments();
-    this.provider.getComments(this.productForComments.id).then( res => { this.comments = res; });
-    const token = localStorage.getItem('token');
-    if(token){
-      this.logged=true;
+  async ngOnInit(): Promise<void> {
+    this.productId = Number(this.route.snapshot.paramMap.get('id'));
+    const last = this.provider.lastProduct;
+    this.productName = last && last.id === this.productId ? last.name : '';
+    try {
+      this.comments = await this.provider.getComments(this.productId);
+    } catch (err) {
+      this.error = this.provider.errorMessage(err);
     }
   }
-
-  addComment(){
-    
-  }
-
 }

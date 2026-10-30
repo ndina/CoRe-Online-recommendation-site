@@ -1,39 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { ProviderService } from 'src/app/services/provider.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  standalone: false,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  username: string;
-  password: string;
-  constructor(private  router: Router, private provider: ProviderService) { }
+  username = '';
+  password = '';
+  error = '';
 
-  ngOnInit() {
+  constructor(private router: Router, private provider: ProviderService) {}
+
+  close(): void {
+    this.router.navigateByUrl('/');
   }
 
-  hide(){
-    this.router.navigateByUrl('');
-  }
-
-  login() {
-    if (this.username !== '' || this.password !== '') {
-    
-        this.provider.login(this.username, this.password).then( res => {
-            localStorage.setItem('token', res.token);
-        });
-        this.provider.logged = true;
-        alert('Welcome');
-        this.router.navigateByUrl('');
+  async login(): Promise<void> {
+    this.error = '';
+    try {
+      await this.provider.login(this.username, this.password);
+      this.router.navigateByUrl('/categories');
+    } catch (err) {
+      this.error = this.provider.errorMessage(err);
     }
   }
-
-  register(){
-    this.router.navigateByUrl('signUp')
-  }
-
 }

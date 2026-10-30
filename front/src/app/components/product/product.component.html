@@ -1,15 +1,7 @@
-<div class="mainBtn">
-    <button type="button" class="btn" id="singleBtn" (click) = "showCommentsOfProduct(product)" routerLink="comments">
-        <div class="panel-body">
-            <div class="media">
-                <div class="media-left media-top">
-                  <img src="{{product.image}}" class="media-object" style="width:60px">
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">{{product.name}}</h4>
-                  <p>{{product.description}}</p>
-                </div>
-              </div>
-        </div>
-    </button>
-</div>
+<a class="paper-card d-flex gap-3" [routerLink]="['/products', product.id, 'comments']" (click)="remember()">
+  <img [src]="product.image" [alt]="product.name" class="thumb">
+  <div>
+    <h4>{{ product.name }}</h4>
+    <p class="mb-0">{{ product.description }}</p>
+  </div>
+</a>

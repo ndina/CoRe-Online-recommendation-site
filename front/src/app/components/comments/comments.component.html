@@ -1,28 +1,20 @@
-     <ng-container *ngIf="!logged">
-          <div>
-              <!-- Example row of columns -->
-              <div class>
-                <div *ngFor="let c of comments">
-                  <app-comment [comment] = "c"></app-comment>
-                </div>
-              </div>
-              <hr>
-            </div> <!-- /container --> 
-      </ng-container>
-  
-    <ng-container *ngIf="logged">
-      <div class="addComment">
-          <button type="button" routerLink="addcomment" class="btn" id="singleBtn"> Add new comment</button>
-      </div>
-      <div>
-          <!-- Example row of columns -->
-          <div class>
-            <div *ngFor="let c of comments">
-              <app-comment [comment] = "c"></app-comment>
-            </div>
-          </div>
-          <hr>
-        </div> <!-- /container -->
-        
-    </ng-container>  
-    
+<div class="container pb-5">
+  <h2 class="page-title">{{ productName || 'Reviews' }}</h2>
+  <div class="text-center mt-3">
+    @if (provider.logged) {
+      <a class="btn btn-success" [routerLink]="['/products', productId, 'comments', 'new']">Add a review</a>
+    } @else {
+      <p><a routerLink="/login">Log in</a> to add your own review.</p>
+    }
+  </div>
+  @if (error) {
+    <div class="alert alert-danger mt-4">{{ error }}</div>
+  }
+  @for (c of comments; track c.id) {
+    <app-comment [comment]="c"></app-comment>
+  } @empty {
+    @if (!error) {
+      <p class="text-center mt-5">No reviews yet. Be the first!</p>
+    }
+  }
+</div>

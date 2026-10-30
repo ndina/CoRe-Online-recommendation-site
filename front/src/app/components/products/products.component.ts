@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ICategory, IProduct } from 'src/app/models/models';
-import { ProviderService } from 'src/app/services/provider.service';
+import { ActivatedRoute } from '@angular/router';
+
+import { ICategory, IProduct } from '../../models/models';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
+  standalone: false,
 })
 export class ProductsComponent implements OnInit {
 
-  public logged=false;
+  category: ICategory | null = null;
+  products: IProduct[] = [];
+  error = '';
 
-  constructor(private provider: ProviderService) { }
-  public categoryForProducts: ICategory;
-  public products: IProduct[]=[];
-  ngOnInit() { 
-    this.categoryForProducts = this.provider.getCategoryForProducts();
-    this.provider.getProducts(this.categoryForProducts.id).then( res => { this.products = res; });
+  constructor(private route: ActivatedRoute, private provider: ProviderService) {}
 
-    const token = localStorage.getItem('token');
-    if(token){
-      this.logged=true;
+  async ngOnInit(): Promise<void> {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    try {
+      [this.category, this.products] = await Promise.all([
+        this.provider.getCategory(id),
+        this.provider.getProducts(id),
+      ]);
+    } catch (err) {
+      this.error = this.provider.errorMessage(err);
     }
-    // if(this.logged){
-
-    // }
   }
-
-  // addProduct(){
-  //   this.provider
-  // }
 }

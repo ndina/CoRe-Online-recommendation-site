@@ -1,25 +1,15 @@
-  <ng-container *ngIf="!logged">
-        <div>
-            <!-- Example row of columns -->
-            <div class>
-              <div *ngFor="let p of products">
-                <app-product [product] = "p"></app-product>
-              </div>
-            </div>
-            <hr>
-          </div> <!-- /container -->
-        
-    </ng-container>
-
-  <ng-container *ngIf="logged">
-      <div>
-          <!-- Example row of columns -->
-          <div class>
-            <div *ngFor="let p of products">
-              <app-product [product] = "p"></app-product>
-            </div>
-          </div>
-          <hr>
-        </div> <!-- /container -->
-      
-  </ng-container>
+<div class="container pb-5">
+  @if (category) {
+    <h2 class="page-title">{{ category.name }}</h2>
+  }
+  @if (error) {
+    <div class="alert alert-danger mt-4">{{ error }}</div>
+  }
+  @for (p of products; track p.id) {
+    <app-product [product]="p"></app-product>
+  } @empty {
+    @if (!error) {
+      <p class="text-center mt-5">No products in this category yet.</p>
+    }
+  }
+</div>

@@ -1,21 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IComment } from 'src/app/models/models';
-import { ProviderService } from 'src/app/services/provider.service';
+import { Component, Input } from '@angular/core';
+
+import { IComment } from '../../models/models';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.css']
+  styleUrls: ['./comment.component.css'],
+  standalone: false,
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent {
 
-  constructor(private provider: ProviderService) { }
+  @Input({ required: true }) comment!: IComment;
 
-  @Input()
-  comment: IComment;
-
-  ngOnInit() {
-    console.log(this.comment);
+  get initial(): string {
+    return (this.comment.name || '?').charAt(0).toUpperCase();
   }
-
 }
